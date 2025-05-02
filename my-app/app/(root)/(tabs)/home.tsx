@@ -119,6 +119,8 @@ const Home = () => {
     },
   ];
 
+  const email = user?.emailAddresses?.[0]?.emailAddress;
+  const username = email?.split("@")[0] || "Rider";
   return (
     <SafeAreaView className="bg-[#0E121A]">
       <View className="mb-8 mt-4">
@@ -126,18 +128,18 @@ const Home = () => {
           className="text-3xl font-semibold ml-4"
           style={{ color: "#6e727a" }}
         >
-          Hello, {user?.emailAddresses[0].emailAddress.split("@")[0]}{" "}
+          Hello, {username}
         </Text>
       </View>
 
       <View className="mx-4 mb-4">
-        <View className="mb-4">
+        {/* <View className="mb-4">
           <GoogleTextInput
             icon={icons.search}
             containerStyle="bg-white shadow-md shadow-neutral-300"
             handlePress={handleDestinationPress}
           />
-        </View>
+        </View> */}
 
         <View className="flex flex-row flex-wrap justify-between items-center mb-4">
           {cards.map((card, index) => (
