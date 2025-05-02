@@ -11,7 +11,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 
 import { router } from "expo-router";
-import { icons } from "@/app/constants";
+import { icons } from "@/constants";
 
 // Define the menu item type
 type MenuItem = {

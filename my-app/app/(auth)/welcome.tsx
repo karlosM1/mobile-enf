@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 import { onboarding } from "../../constants";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/CustomeButton";
 
 const Onboarding = () => {
   const swiperRef = useRef<Swiper>(null);

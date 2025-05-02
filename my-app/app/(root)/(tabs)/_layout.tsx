@@ -1,4 +1,4 @@
-import { icons } from "@/app/constants";
+import { icons } from "@/constants";
 import { Tabs } from "expo-router";
 import { View, Image, ImageSourcePropType } from "react-native";
 

@@ -1,11 +1,15 @@
+import "react-native-get-random-values";
+import { Redirect } from "expo-router";
 import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "@clerk/clerk-expo";
 
-export default function Index() {
-  return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-red-500">
-        Edit app/index.tsx to edit this screen.
-      </Text>
-    </View>
-  );
-}
+const Home = () => {
+  const { isSignedIn } = useAuth();
+
+  if (isSignedIn) {
+    return <Redirect href="/(root)/(tabs)/home" />;
+  }
+  return <Redirect href="/(auth)/welcome" />;
+};
+export default Home;

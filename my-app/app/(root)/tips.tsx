@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { router, useLocalSearchParams } from "expo-router";
-import { icons, images } from "@/app/constants";
+import { icons, images } from "@/constants";
 const contentData: Record<
   string,
   {
@@ -309,7 +309,7 @@ export default function DetailScreen() {
           <View className="px-6 pb-8 pt-6">
             <TouchableOpacity
               className="bg-[#0E121A] rounded-full py-4 items-center"
-              // onPress={() => router.push("/(root)/(tabs)/profile")}
+              onPress={() => router.push("/(root)/(tabs)/profile")}
             >
               <Text className="text-[#3B82F6] text-lg font-medium">
                 {content.buttonText}
