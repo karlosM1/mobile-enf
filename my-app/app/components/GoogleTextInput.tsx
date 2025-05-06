@@ -1,6 +1,5 @@
-import { View, Image } from "react-native";
+import { View, Image, Text } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-
 import { icons } from "@/constants";
 import { GoogleInputProps } from "@/types/type";
 
@@ -19,7 +18,7 @@ const GoogleTextInput = ({
     >
       <GooglePlacesAutocomplete
         fetchDetails={true}
-        placeholder="Search"
+        placeholder="Where do you want to go?"
         debounce={200}
         styles={{
           textInputContainer: {
@@ -51,11 +50,13 @@ const GoogleTextInput = ({
           },
         }}
         onPress={(data, details = null) => {
-          handlePress({
-            latitude: details?.geometry.location.lat!,
-            longitude: details?.geometry.location.lng!,
-            address: data.description,
-          });
+          if (details) {
+            handlePress({
+              latitude: details?.geometry.location.lat!,
+              longitude: details?.geometry.location.lng!,
+              address: data.description,
+            });
+          }
         }}
         query={{
           key: googlePlacesApiKey,
@@ -73,6 +74,20 @@ const GoogleTextInput = ({
         textInputProps={{
           placeholderTextColor: "gray",
           placeholder: initialLocation ?? "Where do you want to go?",
+        }}
+        onFail={(error) => {
+          console.error("Google Places Autocomplete error:", error);
+        }}
+        renderRow={(data) => {
+          if (data && data.description) {
+            return (
+              <View className="p-2">
+                <Text>{data.description}</Text>
+              </View>
+            );
+          } else {
+            return null;
+          }
         }}
       />
     </View>

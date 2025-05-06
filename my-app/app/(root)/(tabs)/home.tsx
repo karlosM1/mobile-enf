@@ -11,10 +11,9 @@ import * as Location from "expo-location";
 import { router } from "expo-router";
 
 const Home = () => {
-  const { user } = useUser();
-
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const [hasPermissions, setHasPermissions] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     (async () => {
@@ -156,7 +155,7 @@ const Home = () => {
 
         <View className="">
           <Text className="text-3xl font-extrabold ml-4 text-white text-center">
-            What Makes Up a Rider's Gear?
+            What Makes Up a Riders Gear?
           </Text>
         </View>
 

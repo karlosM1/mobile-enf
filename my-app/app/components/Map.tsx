@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
 import { icons } from "@/constants";
-import { useFetch } from "@/lib/fetch";
 import {
   calculateDriverTimes,
   calculateRegion,
   generateMarkersFromData,
 } from "@/lib/map";
 
-import { Driver, MarkerData } from "@/types/type";
 import { useLocationStore } from "@/store";
 
 const directionsAPI = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
