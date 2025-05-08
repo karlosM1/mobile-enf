@@ -16,49 +16,47 @@ import { useUser } from "@clerk/clerk-expo";
 import { useAuth } from "@clerk/clerk-expo";
 
 // Sample violation data
-const sampleViolations: ViolationProps[] = [
-  {
-    id: "1",
-    plate_number: "ABC123",
-    violation_type: "No Helmet",
-    detected_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 minutes ago
-    image_url: "",
-    is_notified: false,
-  },
-  {
-    id: "2",
-    plate_number: "XYZ789",
-    violation_type: "No Helmet",
-    detected_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
-    image_url: "",
-    is_notified: true,
-  },
-  {
-    id: "3",
-    plate_number: "DEF456",
-    violation_type: "Helmet",
-    detected_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), // 5 hours ago
+// const sampleViolations: ViolationProps[] = [
+//   {
+//     id: "1",
+//     plate_number: "ABC123",
+//     violation_type: "No Helmet",
+//     detected_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 minutes ago
+//     image_url: "",
+//     is_notified: false,
+//   },
+//   {
+//     id: "2",
+//     plate_number: "XYZ789",
+//     violation_type: "No Helmet",
+//     detected_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
+//     image_url: "",
+//     is_notified: true,
+//   },
+//   {
+//     id: "3",
+//     plate_number: "DEF456",
+//     violation_type: "Helmet",
+//     detected_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), // 5 hours ago
 
-    image_url: "",
-    is_notified: false,
-  },
-  {
-    id: "4",
-    plate_number: "GHI789",
-    violation_type: "No Helmet",
-    detected_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1 day ago
-    image_url: "",
-    is_notified: true,
-  },
-];
+//     image_url: "",
+//     is_notified: false,
+//   },
+//   {
+//     id: "4",
+//     plate_number: "GHI789",
+//     violation_type: "No Helmet",
+//     detected_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1 day ago
+//     image_url: "",
+//     is_notified: true,
+//   },
+// ];
 
 type FilterType = "all" | "unread" | "violations";
 
 const NotificationTab: React.FC = () => {
   const { user } = useUser();
-  const userEmail = user?.emailAddresses[0]?.emailAddress; // Log the user ID to check if it's available
-
-  console.log("User email:", userEmail);
+  const userEmail = user?.emailAddresses[0]?.emailAddress;
   const [notifications, setNotifications] = useState<ViolationProps[]>([]);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [loading, setLoading] = useState(true);
@@ -69,23 +67,29 @@ const NotificationTab: React.FC = () => {
       const fetchViolations = async () => {
         try {
           setLoading(true);
-          // Use email in the request URL
-          const response = await fetch(
-            `http://127.0.0.1:8000/mobile/userviolation/${userEmail}`
-          );
-          if (!response.ok) {
-            throw new Error("Failed to fetch violations");
-          }
-          const data = await response.json();
+
+          const ip = process.env.EXPO_PUBLIC_MOBILE_SERVER_URL; // change to hotspot mobile server URL
+          const url = `${ip}/mobile/userviolation/${encodeURIComponent(
+            userEmail
+          )}`;
+
+          const response = await fetch(url);
+
+          const text = await response.text();
+          const data = JSON.parse(text);
           setNotifications(data.violations);
-        } catch (err) {
-          setError("Failed to load violations");
+          setError(null);
+        } catch (err: any) {
+          console.error("Fetch error:", err);
+          setError(err.message || "Failed to load violations");
         } finally {
           setLoading(false);
         }
       };
 
       fetchViolations();
+    } else {
+      console.log("No userEmail yet.");
     }
   }, [userEmail]);
 

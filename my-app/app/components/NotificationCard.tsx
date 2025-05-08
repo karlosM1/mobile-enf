@@ -41,6 +41,10 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
   onPress,
   read,
 }) => {
+  const baseUrl = "http://172.20.10.12:8000/";
+  const imageUrl = violation.image_url
+    ? `${baseUrl}${violation.image_url}`
+    : null;
   const isNoHelmet = violation.violation_type === "No Helmet";
 
   return (
@@ -89,9 +93,9 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
           </View>
         </View>
 
-        {violation.image_url ? (
+        {imageUrl ? (
           <Image
-            source={{ uri: violation.image_url }}
+            source={{ uri: imageUrl }}
             className="w-full h-24 rounded-md mt-3 bg-gray-200"
           />
         ) : (
