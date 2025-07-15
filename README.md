@@ -40,6 +40,18 @@ Designed to promote road safety and give riders more control and awareness over 
 
 ---
 
+## 🔐 Login Screen
+![Login Screen](./my-app/assets/sign-in-with-email.PNG)
+
+## 🚨 Home
+![Login Screen](./my-app/assets/home.PNG)
+
+## 🗺️ Violation Map View
+![Map View](./my-app/assets/google-maps-integration.PNG)
+
+## 🛡️ Safety Tips Page
+![Safety Tips](./my-app/assets/safety-tip-tab.PNG)
+
 ## 📦 Installation
 
 > Requires Node.js, Yarn/NPM, and Expo CLI
