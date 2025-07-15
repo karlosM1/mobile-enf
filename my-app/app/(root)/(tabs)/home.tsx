@@ -9,6 +9,7 @@ import GoogleTextInput from "@/app/components/GoogleTextInput";
 import { useLocationStore } from "@/store";
 import * as Location from "expo-location";
 import { router } from "expo-router";
+import Map from "@/app/components/Map";
 
 const Home = () => {
   const { setUserLocation, setDestinationLocation } = useLocationStore();
@@ -132,13 +133,13 @@ const Home = () => {
       </View>
 
       <View className="mx-4 mb-4">
-        {/* <View className="mb-4">
+        <View className="mb-4">
           <GoogleTextInput
             icon={icons.search}
             containerStyle="bg-white shadow-md shadow-neutral-300"
             handlePress={handleDestinationPress}
           />
-        </View> */}
+        </View>
 
         <View className="flex flex-row flex-wrap justify-between items-center mb-4">
           {cards.map((card, index) => (

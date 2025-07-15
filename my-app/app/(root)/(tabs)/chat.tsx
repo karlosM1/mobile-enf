@@ -10,10 +10,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import NotificationCard from "@/app/components/NotificationCard";
-import { useFetch } from "@/lib/fetch";
 import { ViolationProps } from "@/types/type";
 import { useUser } from "@clerk/clerk-expo";
-import { useAuth } from "@clerk/clerk-expo";
 
 // Sample violation data
 // const sampleViolations: ViolationProps[] = [
@@ -68,7 +66,7 @@ const NotificationTab: React.FC = () => {
         try {
           setLoading(true);
 
-          const ip = process.env.EXPO_PUBLIC_MOBILE_SERVER_URL; // change to hotspot mobile server URL
+          const ip = ""; // Replace with your API endpoint
           const url = `${ip}/mobile/userviolation/${encodeURIComponent(
             userEmail
           )}`;
